@@ -1,2 +1,2 @@
-# -ourseHighSpeedHighway
+# CourseHighSpeedHighway
 Курс по программе "Поезда будущего: как работают цифровые системы ВСМ?"
