@@ -238,6 +238,13 @@ Arduino](./media/image1.jpeg)
 Рисунок 2 - Температурный датчик DHT22
 
 Содержание вкладки libraries.txt:
+```
+# Wokwi Library List
+# See https://docs.wokwi.com/guides/libraries
+
+# Automatically added based on includes:
+DHT sensor library
+```
 
 DHTlib
 
