@@ -111,7 +111,7 @@ void setup() {
 void loop() {
   int data = digitalRead(prm); // читаем значение на входе приёмника
   ShiftReg(data, testReg); // вдвигаем полученное число в тестовый регистр
-  if (IsCommandDetected) { // проверяем, нет ли в тестовом регистре искомой последовательности
+  if (IsCommandDetected(testReg, pattern)) { // проверяем, нет ли в тестовом регистре искомой последовательности
     state = !state; // если есть, меняем состояние светодиода
     digitalWrite(ledPin, state);
   }
@@ -120,15 +120,15 @@ void loop() {
 
 // вдвигает в тестовый регистр новое значение
 void ShiftReg(int newVal, int *arr) {
-  for (int i=0; i<len; i++) {
-    arr[i] = testReg[i+1]; // смещаем значения в регистре на 1 позицию
+  for (int i = len - 1; i > 0; i--) {
+    arr[i] = arr[i - 1]; // смещаем значения в регистре на 1 позицию вправо
   }
-  arr[len-1] = newVal; // последнюю позицию заменяем только что принятым измерением
+  arr[0] = newVal; // первую позицию заменяем только что принятым измерением
 }
 
 // проверяет, обнаружена ли команда на входе приёмника
-bool IsCommandDetected() {
-  for (int i=0; i<len; i++) {
+bool IsCommandDetected(const int *testReg, const int *pattern) {
+  for (int i = 0; i < len; i++) {
     if (testReg[i] != pattern[i]) { // почленно сравниваем 2 массива
       return false;
     }
